@@ -1,0 +1,7 @@
+groq
+langchain
+langchain_community
+chromadb
+langchain_groq
+fastembed
+PDFPlumber

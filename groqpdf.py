@@ -7,22 +7,12 @@ Original file is located at
     https://colab.research.google.com/drive/1EA_jSQKaPjnN8vqHH-krRUU3Obwuiubd
 """
 
-!pip install groq
-!pip install langchain
-!pip install langchain_community
-!pip install chromadb
-!pip install langchain_groq
-!pip install fastembed
-!pip install PDFPlumber
-
-!pip install
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PDFPlumberLoader
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain.chains.combine_documents import create_stuff_documents_chain
-
 from langchain_groq import ChatGroq
 
 folder_path = "db"
@@ -37,7 +27,7 @@ text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=512, chunk_overlap=80,length_function=len
 )
 
-loader = PDFPlumberLoader("gatsby.pdf")
+loader = PDFPlumberLoader("xxx.pdf")
 docs = loader.load_and_split()
 chunks = text_splitter.split_documents(docs)
 
@@ -79,7 +69,3 @@ print(result["answer"])
 
 #for doc in result["context"]:
 #  print("page content: ", doc.page_content)
-
-question = "what is a panda?"
-response = llm.invoke(question)
-print(response)

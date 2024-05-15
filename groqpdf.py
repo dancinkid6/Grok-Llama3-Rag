@@ -19,7 +19,7 @@ folder_path = "db"
 
 llm = ChatGroq(temperature=0,
                       model_name="llama3-70b-8192",
-                      api_key="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",)
+                      api_key="",)
 
 embedding = FastEmbedEmbeddings()
 

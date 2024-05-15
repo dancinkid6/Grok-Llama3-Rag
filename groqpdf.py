@@ -11,6 +11,8 @@ from langchain_community.document_loaders import PDFPlumberLoader
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain.chains import create_retrieval_chain
+from langchain.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 
 
@@ -29,10 +31,6 @@ docs = loader.load_and_split()
 chunks = text_splitter.split_documents(docs)
 
 vector_store = Chroma.from_documents(documents=chunks, embedding=embedding)
-
-from langchain.chains import create_retrieval_chain
-from langchain.prompts import PromptTemplate
-
 
 retriever = vector_store.as_retriever(
     search_type="similarity_score_threshold",
@@ -56,12 +54,8 @@ prompt = PromptTemplate(
 document_chain = create_stuff_documents_chain(llm, prompt)
 chain = create_retrieval_chain(retriever, document_chain)
 
-
-
 question = "is gatsby a criminal?"
-
 result = chain.invoke({"input":question})
-
 print(result["answer"])
 
 #for doc in result["context"]:
